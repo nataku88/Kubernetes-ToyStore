@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: toystore-api-service
+  namespace: toystore
+
+spec:
+  selector:
+    app: store-api  #matches labels in deployment.yaml
+  
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  
+  type: ClusterIP

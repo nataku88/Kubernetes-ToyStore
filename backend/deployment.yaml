@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-api
+  namespace: toystore
+
+spec:
+  replicas: 1
+  selector:           #identify which pods belong to this Deployment
+    matchLabels:
+      app: store-api
+    
+  template:
+    metadata:
+      labels:
+        app: store-api
+      
+    spec:
+      containers:
+        - name: store-api
+          image: vandread44/store-api:latest
+          ports:
+            - containerPort: 8080
+          
+          #This is to apply secret
+          env:
+            - name: ConnectionStrings__products
+              valueFrom:
+                secretKeyRef:
+                  name: toystore-secret
+                  key: products

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-store-app
+  namespace: toystore
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-store-app
+  
+  template:
+    metadata:
+      labels:
+        app: react-store-app
+    
+    spec:
+      containers:
+        - name: react-store-app
+          image: vandread44/react-store-app:latest
+          ports:
+            - containerPort: 80
